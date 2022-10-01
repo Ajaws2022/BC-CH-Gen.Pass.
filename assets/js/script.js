@@ -37,7 +37,7 @@ function generatePassword(){
   var password = [];
 
   function selRandChar(array){
-    var randomNumber = Math.floor(math.random() * array.length);
+    var randomNumber = Math.floor(Math.random() * array.length);
     return array[randomNumber];
   }
   
@@ -70,8 +70,9 @@ function generatePassword(){
   var remainChar = options.length - password.length;
   for(var i = 0; i < remainChar; i++){
     var randChar = selRandChar(possPasswordChars);
-    password.push(randChar)
+    password.push(randChar);
   }
+  // I need to add something to turn the array into a string
 
 }
 // Assignment Code
