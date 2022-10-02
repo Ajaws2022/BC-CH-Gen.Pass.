@@ -20,6 +20,15 @@ function generatePassword(){
 
   var passwordLength = prompt('How long would you like your password to be');
   //create if statement to check value given is between 8-128
+   if (8 >= passwordLength <= 128){
+     return(passwordLength)
+
+   } 
+    else { 
+      alert("Please enter a value between 8-128 characters")
+   };
+  
+
   var inclSpecChar = confirm("Would you like to include special characters");
   var inclNumChar = confirm("Would you like to include numeric characters");
   var inclUpperChar = confirm("Would you like to include uppercase characters");
@@ -39,7 +48,7 @@ function generatePassword(){
   function selRandChar(array){
     var randomNumber = Math.floor(Math.random() * array.length);
     return array[randomNumber];
-  }
+  };
   
 
   if(options.inclSpecChar){
@@ -64,15 +73,22 @@ function generatePassword(){
     possPasswordChars = possPasswordChars.concat(lowerChar);
     password.push(selRandChar(lowerChar)); 
     
-   }
+   };
   //  to generate the password I need to loop through the remaining characters to fill the lenght randomly
   // the characters I've already added need to be subtracted from the length
-  var remainChar = options.length - password.length;
+  var remainChar = options.passwordLength - password.length;
   for(var i = 0; i < remainChar; i++){
     var randChar = selRandChar(possPasswordChars);
+  
     password.push(randChar);
+    
   }
   // I need to add something to turn the array into a string
+   
+  password.toString();
+
+  return password;
+ 
 
 }
 // Assignment Code
