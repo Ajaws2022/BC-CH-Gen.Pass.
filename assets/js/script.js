@@ -1,9 +1,4 @@
-// var specChar = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', 
-// '(', ')', '()', '-', '_', '+', '=', '|', '\\', ']', '[', '}', '{', ':', 
-// ';', '"', "'", '<', '>', ',', '.', '?', '/'];
-
-//  there are four password options to choose from
-// we need 5 functions, one for determining length, and the four options
+// Turns the object in our html with the generate class into the generate button
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -39,7 +34,7 @@ var newPassword = "";
     alert("Please enter a valid number between 8-128") 
     passwordLength = prompt('How long would you like your password to be')
   }
-
+// Allows user to choose character types for the password
   var inclSpecChar = confirm("Would you like to include special characters");
   var inclNumChar = confirm("Would you like to include numeric characters");
   var inclUpperChar = confirm("Would you like to include uppercase characters");
@@ -54,54 +49,34 @@ var newPassword = "";
   }; 
   
   
-
+// iterates over the user input to determine which characters to use or not
   if(inclSpecChar){
-    // generate random spec care
-    // push it to password
     possPasswordChars = possPasswordChars.concat(specChar);
-     
-    // math.floor and math.random acan be used to make a random selection
-    newPassword.push(random(specChar));
-
+    newPassword.concat(random(specChar));
    }
-
    if(inclNumChar){
     possPasswordChars = possPasswordChars.concat(numChar);
-    newPassword.push(random(numChar));
+    newPassword.concat(random(numChar));
    }
    if(inclUpperChar){
     possPasswordChars = possPasswordChars.concat(upperChar);
-    newPassword.push(random(upperChar));
+    newPassword.concat(random(upperChar));
    }
    if(inclLowerChar){
     possPasswordChars = possPasswordChars.concat(lowerChar);
-    newPassword.push(random(lowerChar));
-     
-    
+    newPassword.concat(random(lowerChar)); 
    };
-  //  to generate the password I need to loop through the remaining characters to fill the lenght randomly
-  // the characters I've already added need to be subtracted from the length
-  // var remainChar = options.passwordlength - password.length;
-
   
-
-
+  //  looops through reamining characters to finish the password length
   for(var i = 0; i < passwordLength; i++){
     // var randChar = selRandChar(possPasswordChars);
     newPassword = newPassword.concat(possPasswordChars.charAt(random(possPasswordChars.length - 1)))
-    // password.push(randChar);
-    
-  }
-  // I need to add something to turn the array into a string
-   
-  // password.toString();
 
+  }
+  // finishes the function by calling the string with the password
   return newPassword;
  
-
 }
-// Assignment Code
 
-
-// Add event listener to generate button
+// Triggers password creation by activating the write password function when generate is clicked
 generateBtn.addEventListener("click", writePassword);
