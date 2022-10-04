@@ -1,97 +1,9 @@
-var specChar = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', 
-'(', ')', '()', '-', '_', '+', '=', '|', '\\', ']', '[', '}', '{', ':', 
-';', '"', "'", '<', '>', ',', '.', '?', '/'];
+// var specChar = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', 
+// '(', ')', '()', '-', '_', '+', '=', '|', '\\', ']', '[', '}', '{', ':', 
+// ';', '"', "'", '<', '>', ',', '.', '?', '/'];
 
-var numChar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-
-var lowerChar = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'l', 
-'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
-
-var upperChar = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'L', 'K', 'J',
-'H', 'G', 'F', 'D', 'S', 'A', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 //  there are four password options to choose from
 // we need 5 functions, one for determining length, and the four options
-
-
-// a function to trigger the application
-function generatePassword(){
-  
-  
-
-  var passwordLength = prompt('How long would you like your password to be');
-  //create if statement to check value given is between 8-128
-   if (8 >= passwordLength <= 128){
-     return(passwordLength)
-
-   } 
-    else { 
-      alert("Please enter a value between 8-128 characters")
-   };
-  
-
-  var inclSpecChar = confirm("Would you like to include special characters");
-  var inclNumChar = confirm("Would you like to include numeric characters");
-  var inclUpperChar = confirm("Would you like to include uppercase characters");
-  var inclLowerChar = confirm("Would you like to include lowercase characters");
-  
-  var options ={
-    passwordLength: passwordLength,
-    inclSpecChar: inclSpecChar,
-    inclNumChar: inclNumChar,
-    inclUpperChar: inclUpperChar,
-    inclLowerChar: inclLowerChar
-  }
-
-  var possPasswordChars= [];
-  var password = [];
-
-  function selRandChar(array){
-    var randomNumber = Math.floor(Math.random() * array.length);
-    return array[randomNumber];
-  };
-  
-
-  if(options.inclSpecChar){
-    // generate random spec care
-    // push it to password
-    possPasswordChars = possPasswordChars.concat(specChar);
-     
-    // math.floor and math.random acan be used to make a random selection
-    password.push(selRandChar(specChar));
-
-   }
-
-   if(options.inclNumChar){
-    possPasswordChars = possPasswordChars.concat(numChar);
-    password.push(selRandChar(numChar)); 
-   }
-   if(options.inclUpperChar){
-    possPasswordChars = possPasswordChars.concat(upperChar);
-    password.push(selRandChar(upperChar)); 
-   }
-   if(options.inclLowerChar){
-    possPasswordChars = possPasswordChars.concat(lowerChar);
-    password.push(selRandChar(lowerChar)); 
-    
-   };
-  //  to generate the password I need to loop through the remaining characters to fill the lenght randomly
-  // the characters I've already added need to be subtracted from the length
-  var remainChar = options.passwordLength - password.length;
-  for(var i = 0; i < remainChar; i++){
-    var randChar = selRandChar(possPasswordChars);
-  
-    password.push(randChar);
-    
-  }
-  // I need to add something to turn the array into a string
-   
-  password.toString();
-
-  return password;
- 
-
-}
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -105,6 +17,91 @@ function writePassword() {
   
 
 }
+
+// Generates a password
+function generatePassword(){
+// Character types
+var specChar = "~!@#$%^&*()"
+
+var numChar = "1234567890";
+
+var lowerChar = "qwertyuioplkjhgfdsazxcvbnm";
+
+var upperChar = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+  
+var possPasswordChars= "";
+var newPassword = "";
+
+
+  var passwordLength = prompt('How long would you like your password to be');
+  // Ensures a password between 8-128 is given
+  while ((passwordLength < 8) || (passwordLength > 128) || (isNaN(passwordLength))) {
+    alert("Please enter a valid number between 8-128") 
+    passwordLength = prompt('How long would you like your password to be')
+  }
+
+  var inclSpecChar = confirm("Would you like to include special characters");
+  var inclNumChar = confirm("Would you like to include numeric characters");
+  var inclUpperChar = confirm("Would you like to include uppercase characters");
+  var inclLowerChar = confirm("Would you like to include lowercase characters");
+  
+  
+// Generates a random character from a string
+  function random(max){
+    // var randomNumber = Math.floor(Math.random() * array.length);
+    // return array[randomNumber];
+    return [Math.floor(Math.random() * max)]
+  }; 
+  
+  
+
+  if(inclSpecChar){
+    // generate random spec care
+    // push it to password
+    possPasswordChars = possPasswordChars.concat(specChar);
+     
+    // math.floor and math.random acan be used to make a random selection
+    newPassword.push(random(specChar));
+
+   }
+
+   if(inclNumChar){
+    possPasswordChars = possPasswordChars.concat(numChar);
+    newPassword.push(random(numChar));
+   }
+   if(inclUpperChar){
+    possPasswordChars = possPasswordChars.concat(upperChar);
+    newPassword.push(random(upperChar));
+   }
+   if(inclLowerChar){
+    possPasswordChars = possPasswordChars.concat(lowerChar);
+    newPassword.push(random(lowerChar));
+     
+    
+   };
+  //  to generate the password I need to loop through the remaining characters to fill the lenght randomly
+  // the characters I've already added need to be subtracted from the length
+  // var remainChar = options.passwordlength - password.length;
+
+  
+
+
+  for(var i = 0; i < passwordLength; i++){
+    // var randChar = selRandChar(possPasswordChars);
+    newPassword = newPassword.concat(possPasswordChars.charAt(random(possPasswordChars.length - 1)))
+    // password.push(randChar);
+    
+  }
+  // I need to add something to turn the array into a string
+   
+  // password.toString();
+
+  return newPassword;
+ 
+
+}
+// Assignment Code
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
