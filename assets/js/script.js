@@ -24,7 +24,7 @@ var possPasswordChars= "";
 var newPassword = "";
 
 
-  var passwordLength = prompt('How long would you like your password to be');
+  var passwordLength = prompt('Please enter a password length between 8-128 characters');
   // Ensures a password between 8-128 is given
   while ((passwordLength < 8) || (passwordLength > 128) || (isNaN(passwordLength))) {
     alert("Please enter a valid number between 8-128") 
