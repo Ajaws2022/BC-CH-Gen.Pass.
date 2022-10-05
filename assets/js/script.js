@@ -6,11 +6,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-   
-
   passwordText.value = password;
-  
-
 }
 
 // Generates a password
@@ -40,14 +36,12 @@ var newPassword = "";
   var inclUpperChar = confirm("Would you like to include uppercase characters");
   var inclLowerChar = confirm("Would you like to include lowercase characters");
   
-  
 // Generates a random character from a string
   function random(max){
     // var randomNumber = Math.floor(Math.random() * array.length);
     // return array[randomNumber];
     return [Math.floor(Math.random() * max)]
   }; 
-  
   
 // iterates over the user input to determine which characters to use or not
   if(inclSpecChar){
